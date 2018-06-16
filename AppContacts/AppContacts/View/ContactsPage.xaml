@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppContacts.View.ContactsPage">
     <ContentPage.Content>
-        
+        <ToolbarItem Text="Agregar" Order="Primary" Command="{Binding AddContactCommand}">
+            
+        </ToolbarItem>
     </ContentPage.Content>
+    <ListView></ListView>
 </ContentPage>

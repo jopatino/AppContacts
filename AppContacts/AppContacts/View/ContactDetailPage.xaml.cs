@@ -11,12 +11,14 @@ using Xamarin.Forms.Xaml;
 namespace AppContacts.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ContactsPage : ContentPage
+	public partial class ContactDetailPage : ContentPage
 	{
-		public ContactsPage ()
+        public ContactDetailPageViewModel ViewModel { get; set; }
+		public ContactDetailPage ()
 		{
 			InitializeComponent ();
-            this.BindingContext = new ContactsPageViewModel(Navigation);
+            ViewModel = new ContactDetailPageViewModel(Navigation);
+            this.BindingContext = ViewModel;
 		}
 	}
 }
