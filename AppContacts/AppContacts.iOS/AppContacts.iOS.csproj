@@ -131,4 +131,5 @@
       <Name>AppContacts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
