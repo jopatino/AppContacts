@@ -1,4 +1,5 @@
-﻿using AppContacts.ViewModel;
+﻿using AppContacts.Model;
+using AppContacts.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,17 @@ namespace AppContacts.View
 	public partial class ContactDetailPage : ContentPage
 	{
         public ContactDetailPageViewModel ViewModel { get; set; }
-		public ContactDetailPage ()
+		public ContactDetailPage (Contact contact = null)
 		{
 			InitializeComponent ();
-            ViewModel = new ContactDetailPageViewModel(Navigation);
+            if (contact == null)
+            {
+                ViewModel = new ContactDetailPageViewModel(Navigation);
+            }
+            else
+            {
+                ViewModel = new ContactDetailPageViewModel(Navigation, contact);
+            }
             this.BindingContext = ViewModel;
 		}
 	}

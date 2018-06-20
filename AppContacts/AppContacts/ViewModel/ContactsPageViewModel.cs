@@ -14,20 +14,33 @@ namespace AppContacts.ViewModel
     {
         public ObservableCollection<Grouping<string, Contact>> contactsList { get; set; }
         public Command AddContactCommand { get; set; }
+        public Contact CurrentContact { get; set; }
         public INavigation Navigation { get; set; }
+        public Command ItemTappedCommand { get; }
+
+        ItemTappedCommand = new Command(async() => GoToDetailContact(CurrentContact));
 
         public ContactsPageViewModel(INavigation navigation)
         {
-            this.Navigation = navigation;
+            Navigation = navigation;
             Task.Run(async () => contactsList = await App.DataBase.GetAllGroupedAsync()).Wait();
             AddContactCommand = new Command(
                 async () => await GoToDetailContact()
                 );
+            ItemTappedCommand = new Command(async () => GoToDetailContact(CurrentContact));
         }
 
-        private async Task GoToDetailContact()
+        private async Task GoToDetailContact(Contact contact = null)
         {
-            await Navigation.PushAsync(new ContactDetailPage);
+            if(contact == null)
+            {
+                await Navigation.PushAsync(new ContactDetailPage());
+            }
+            else
+            {
+                await Navigation.PushAsync(new ContactDetailPage(CurrentContact));
+            }
+            
         }
     }
 }

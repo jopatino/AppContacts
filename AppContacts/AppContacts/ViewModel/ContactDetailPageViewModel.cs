@@ -14,10 +14,18 @@ namespace AppContacts.ViewModel
         public Command DeleteContactCommand { get; set; }
         public INavigation Navigation { get; set; }
 
-        public ContactDetailPageViewModel(INavigation navigation)
+        public ContactDetailPageViewModel(INavigation navigation, Contact contact = null)
         {
             this.Navigation = navigation;
-            CurrentContact = new Contact();
+            if(contact == null)
+            {
+                CurrentContact = new Contact();
+            }
+            else
+            {
+                CurrentContact = contact;
+            }
+            
             SaveContactCommand = new Command(async () => await SaveContact());
         }
 
